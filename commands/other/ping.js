@@ -6,7 +6,7 @@ module.exports = {
     description: 'Show the bot speed',
     usage: '<prefix>ping',
     category: 'other',
-    permissions: [''],
+    permissions: [],
     botPermissions: ['EMBED_LINKS'],
     guildOnly: true,
     ownerOnly: false,
