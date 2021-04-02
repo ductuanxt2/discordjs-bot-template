@@ -4,11 +4,11 @@ module.exports = {
   async execute(message, client) {
     const prefix = config.prefix;
     const owner = config.owner;
+    if (!message.content.startsWith(prefix)) return;
     const args = message.content.slice(prefix.length).trim().split(' ');
     const commandName = args.shift().toLowerCase();
     const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
     if (!command) return;
-    if (!message.content.startsWith(prefix)) return;
     //Owner only commands checker
     if (command.ownerOnly && !owner.includes(message.author.id)) return;
     //Guild only commands check
