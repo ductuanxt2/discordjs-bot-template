@@ -1,6 +1,7 @@
 //Variables
 const fs = require("fs");
 const Discord = require("discord.js");
+const config = require("./config.json")
 
 //Bot
 const client = new Discord.Client();
