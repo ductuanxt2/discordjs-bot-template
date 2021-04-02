@@ -1,4 +1,4 @@
-const config = require("./config.json");
+const config = require("../config.js");
 module.exports = {
   name: 'message',
   async execute(message, client) {
@@ -10,7 +10,7 @@ module.exports = {
     if (!command) return;
     if (!message.content.startsWith(prefix)) return;
     //Owner only commands checker
-    if (command.ownerOnly && !client.owner.includes(message.author.id)) return;
+    if (command.ownerOnly && !owner.includes(message.author.id)) return;
     //Guild only commands check
     if (command.guildOnly && message.channel.type === 'dm') return;
     //Permissions checker
@@ -30,7 +30,7 @@ module.exports = {
     }
     //Cooldowns
     const { cooldowns } = client;
-    if (!client.owner.includes(message.author.id)) {
+    if (!owner.includes(message.author.id)) {
 	if (!cooldowns.has(command.name)) {
 	    cooldowns.set(command.name, new Discord.Collection());
 	}
