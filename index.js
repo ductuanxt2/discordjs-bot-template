@@ -7,6 +7,7 @@ const config = require("./config.js")
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
+client.config = config;
 
 //Command Handler
 const folder = fs.readdirSync('./commands/');
