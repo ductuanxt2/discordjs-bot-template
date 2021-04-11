@@ -1,9 +1,8 @@
-const config = require("../config.js");
 module.exports = {
   name: 'message',
   async execute(message, client) {
-    const prefix = config.prefix;
-    const owner = config.owner;
+    const prefix = client.config.prefix;
+    const owner = client.config.owner;
     if (!message.content.startsWith(prefix)) return;
     const args = message.content.slice(prefix.length).trim().split(' ');
     const commandName = args.shift().toLowerCase();
