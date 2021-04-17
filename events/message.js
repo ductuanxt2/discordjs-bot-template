@@ -13,13 +13,6 @@ module.exports = {
     //Guild only commands check
     if (command.guildOnly && message.channel.type === 'dm') return;
     //Permissions checker
-    //Check author perms
-    if (command.permissions) {
-        const authorPerms = message.channel.permissionsFor(message.author);
-	if (!authorPerms || !authorPerms.has(command.permissions)) {
-	    return message.channel.send('You need `' + command.permissions + '` permission to run this command');
-        }
-    }
     //Check bot perms
     if (command.botPermissions) {
         const botPerms = message.channel.permissionsFor(client.user);
@@ -27,9 +20,16 @@ module.exports = {
             return message.channel.send('I need `' + command.botPermissions + '` permission to run this command');
         }
     }
+    if (!owner.includes(message.author.id)) {
+    //Check author perms
+    if (command.permissions) {
+        const authorPerms = message.channel.permissionsFor(message.author);
+	if (!authorPerms || !authorPerms.has(command.permissions)) {
+	    return message.channel.send('You need `' + command.permissions + '` permission to run this command');
+        }
+    }
     //Cooldowns
     const { cooldowns } = client;
-    if (!owner.includes(message.author.id)) {
 	if (!cooldowns.has(command.name)) {
 	    cooldowns.set(command.name, new Discord.Collection());
 	}
