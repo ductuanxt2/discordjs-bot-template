@@ -1,6 +1,6 @@
 module.exports = {
   name: 'message',
-  async execute(message, client) {
+  execute(message, client) {
     const prefix = client.config.prefix;
     const owner = client.config.owner;
     if (!message.content.startsWith(prefix)) return;
@@ -20,7 +20,6 @@ module.exports = {
             return message.channel.send('I need `' + command.botPermissions + '` permission to run this command');
         }
     }
-    if (!owner.includes(message.author.id)) {
     //Check author perms
     if (command.permissions) {
         const authorPerms = message.channel.permissionsFor(message.author);
@@ -45,7 +44,6 @@ module.exports = {
         }
 	timestamps.set(message.author.id, now);
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-    }
     //Executing Commands
     try {
 	command.execute(client, message, args);
