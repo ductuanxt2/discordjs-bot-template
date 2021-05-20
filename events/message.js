@@ -1,15 +1,15 @@
 module.exports = {
   name: 'message',
   execute(message, client) {
+    if (message.author.bot) return;
     const prefix = client.config.prefix;
-    const owner = client.config.owner;
     if (!message.content.startsWith(prefix)) return;
     const args = message.content.slice(prefix.length).trim().split(' ');
     const commandName = args.shift().toLowerCase();
     const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
     if (!command) return;
     //Owner only commands checker
-    if (command.ownerOnly && !client.owner.includes(message.author.id)) return;
+    if (command.ownerOnly && !client.config.owner.includes(message.author.id)) return;
     //Guild only commands check
     if (command.guildOnly && message.channel.type === 'dm') return;
     //Permissions checker
