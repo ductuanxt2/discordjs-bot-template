@@ -9,7 +9,7 @@ module.exports = {
     const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
     if (!command) return;
     //Owner only commands checker
-    if (command.ownerOnly && !owner.includes(message.author.id)) return;
+    if (command.ownerOnly && !client.owner.includes(message.author.id)) return;
     //Guild only commands check
     if (command.guildOnly && message.channel.type === 'dm') return;
     //Permissions checker
@@ -28,12 +28,11 @@ module.exports = {
         }
     }
     //Cooldowns
-    const { cooldowns } = client;
-	if (!cooldowns.has(command.name)) {
-	    cooldowns.set(command.name, new Discord.Collection());
+	if (!client.cooldowns.has(command.name)) {
+	    client.cooldowns.set(command.name, new Discord.Collection());
 	}
         const now = Date.now();
-	const timestamps = cooldowns.get(command.name);
+	const timestamps = client.cooldowns.get(command.name);
 	const cooldownAmount = (command.cooldown || 1) * 1000;
 	if (timestamps.has(message.author.id)) {
 	    const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
