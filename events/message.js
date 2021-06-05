@@ -28,21 +28,21 @@ module.exports = {
         }
     }
     //Cooldowns
-	if (!client.cooldowns.has(command.name)) {
-	    client.cooldowns.set(command.name, new Discord.Collection());
+    if (!client.cooldowns.has(command.name)) {
+        client.cooldowns.set(command.name, new Discord.Collection());
+    }
+    const now = Date.now();
+    const timestamps = client.cooldowns.get(command.name);
+    const cooldownAmount = (command.cooldown || 1) * 1000;
+    if (timestamps.has(message.author.id)) {
+	const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+	if (now < expirationTime) {
+	    const timeLeft = (expirationTime - now) / 1000;
+            return message.channel.send('**Cooldown!** Try again in ' + Math.floor(timeLeft) + ' second(s)');
 	}
-        const now = Date.now();
-	const timestamps = client.cooldowns.get(command.name);
-	const cooldownAmount = (command.cooldown || 1) * 1000;
-	if (timestamps.has(message.author.id)) {
-	    const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
-	    if (now < expirationTime) {
-	        const timeLeft = (expirationTime - now) / 1000;
-		return message.channel.send('**Cooldown!** Try again in ' + Math.floor(timeLeft) + ' second(s)');
-	    }
-        }
-	timestamps.set(message.author.id, now);
-	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+    }
+    timestamps.set(message.author.id, now);
+    setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
     //Executing Commands
     try {
 	command.execute(client, message, args);
