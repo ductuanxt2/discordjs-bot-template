@@ -11,6 +11,7 @@
 ### After you finished all of that:
 - Put these code into your host.
 - Go to `config.js` and change them.
+- In your terminal/console, run `npm install` and `npm start`. (Only if your host didn't do it for you already).
 
 ### To run your bot:
 - Open the terminal/console and type in `node .` or `node <your main file name>`.
