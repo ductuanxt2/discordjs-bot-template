@@ -28,9 +28,7 @@ module.exports = {
         }
     }
     //Cooldowns
-    if (!client.cooldowns.has(command.name)) {
-        client.cooldowns.set(command.name, new Discord.Collection());
-    }
+    if (!client.cooldowns.has(command.name)) client.cooldowns.set(command.name, new Discord.Collection());
     const now = Date.now();
     const timestamps = client.cooldowns.get(command.name);
     const cooldownAmount = (command.cooldown || 1) * 1000;
