@@ -12,9 +12,7 @@ client.config = config;
 //Command Handler
 const folder = fs.readdirSync('./commands/');
 for (const subfolders of folder) {
-	const subfolder = fs
-		.readdirSync(`./commands/${subfolders}/`)
-		.filter(file => file.endsWith('.js'));
+	const subfolder = fs.readdirSync(`./commands/${subfolders}/`).filter(file => file.endsWith('.js'));
 	for (const commands of subfolder) {
 		const command = require(`./commands/${subfolders}/${commands}`);
 		client.commands.set(command.name, command);
