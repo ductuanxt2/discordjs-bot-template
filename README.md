@@ -14,7 +14,7 @@
 - In your terminal/console, run `npm install` and `npm start`. (Only if your host didn't do it for you already).
 
 ### To run your bot:
-- Open the terminal/console and type in `node .` or `node start <your main file name>`.
+- Open the terminal/console and type in `node .` or `node <your main file name>`.
 - Or just click start if your host have one.
 
 ### And you are done!
